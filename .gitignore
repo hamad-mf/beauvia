@@ -2,7 +2,7 @@
 .DS_Store
 .env
 .env.backup
-.env.production
+# .env.production - tracked in deploy/ with placeholder password
 .phpactor.json
 .phpunit.result.cache
 /.fleet
