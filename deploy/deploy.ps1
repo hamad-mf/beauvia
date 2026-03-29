@@ -42,21 +42,25 @@ Write-Host ""
 Write-Host "  [2/3] SSHing into Hostinger to pull updates..." -ForegroundColor Cyan
 
 $sshUser = "u512491826"
-$sshHost = "ssh.beauvia.in"
+$sshHost = "in-mum-web2109.hostinger.com"
+
+$PHP = "/opt/alt/php84/usr/bin/php"
+$COMPOSER = "/usr/local/bin/composer"
+$PUBLIC = "~/domains/beauvia.in/public_html"
 
 $remoteCmd = @"
 cd ~/beauvia && \
 git pull origin main && \
-composer install --no-dev --optimize-autoloader --no-interaction && \
-php artisan migrate --force && \
-php artisan config:cache && \
-php artisan route:cache && \
-php artisan view:cache && \
+$PHP $COMPOSER install --no-dev --optimize-autoloader --no-interaction && \
+$PHP artisan migrate --force && \
+$PHP artisan config:cache && \
+$PHP artisan route:cache && \
+$PHP artisan view:cache && \
 echo '--- Syncing public assets ---' && \
-cp -r public/build/ ~/public_html/build/ 2>/dev/null; \
-cp public/.htaccess ~/public_html/.htaccess 2>/dev/null; \
-cp public/favicon.ico ~/public_html/favicon.ico 2>/dev/null; \
-cp public/robots.txt ~/public_html/robots.txt 2>/dev/null; \
+cp -r public/build/ $PUBLIC/build/ 2>/dev/null; \
+cp public/.htaccess $PUBLIC/.htaccess 2>/dev/null; \
+cp public/favicon.ico $PUBLIC/favicon.ico 2>/dev/null; \
+cp public/robots.txt $PUBLIC/robots.txt 2>/dev/null; \
 echo 'DEPLOY COMPLETE'
 "@
 
