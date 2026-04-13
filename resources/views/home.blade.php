@@ -16,7 +16,7 @@
                 </div>
 
                 <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6 animate-slide-up text-gray-900">
-                    Boo Beauty &<br>
+                    Book Beauty &<br>
                     <span class="gradient-text">Wellness Services</span>
                 </h1>
 
