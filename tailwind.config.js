@@ -51,7 +51,7 @@ export default {
             },
             backgroundImage: {
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-                'hero-gradient': 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%)',
+                'hero-gradient': 'linear-gradient(135deg, #f5f3ff 0%, #ede9fe 50%, #f9fafb 100%)',
             },
             animation: {
                 'float': 'float 6s ease-in-out infinite',
@@ -65,8 +65,8 @@ export default {
                     '50%': { transform: 'translateY(-20px)' },
                 },
                 glow: {
-                    '0%': { boxShadow: '0 0 20px rgba(124, 58, 237, 0.3)' },
-                    '100%': { boxShadow: '0 0 40px rgba(124, 58, 237, 0.6)' },
+                    '0%': { boxShadow: '0 0 20px rgba(124, 58, 237, 0.1)' },
+                    '100%': { boxShadow: '0 0 40px rgba(124, 58, 237, 0.15)' },
                 },
                 slideUp: {
                     '0%': { transform: 'translateY(20px)', opacity: '0' },
