@@ -11,11 +11,6 @@ use Illuminate\Support\Carbon;
 
 class BookingController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function createShop(string $slug)
     {
         $shop = Shop::where('slug', $slug)->with([
