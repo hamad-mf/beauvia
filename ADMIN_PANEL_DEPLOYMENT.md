@@ -1,8 +1,51 @@
 # Admin Panel Deployment Guide
 
-## After Git Pull on Production Server
+## Beauvia Production Deployment Steps
 
-Follow these steps to make the admin panel work on your production server:
+### Local Machine (Windows)
+
+1. Make your changes
+2. Run `npm run build`
+3. Push to GitHub:
+   ```bash
+   git add .
+   git commit -m "commit message"
+   git push
+   ```
+
+### Production Server
+
+1. SSH into server:
+   ```powershell
+   ssh u512491826@145.79.212.105 -p 65002
+   # Password: @Beauviassh123
+   ```
+
+2. Navigate to project:
+   ```bash
+   cd beauvia
+   ```
+
+3. Pull latest code:
+   ```bash
+   git pull
+   ```
+
+4. Copy build files to live server:
+   ```bash
+   cp -r ~/beauvia/public/build/* ~/domains/beauvia.in/public_html/build/
+   ```
+
+5. Clear Laravel caches:
+   ```bash
+   php artisan view:clear
+   php artisan config:clear
+   php artisan cache:clear
+   ```
+
+## First-Time Admin Panel Setup (One-Time Only)
+
+After deploying the admin panel code for the first time, run these additional steps:
 
 ### 1. Run Database Migrations
 ```bash
