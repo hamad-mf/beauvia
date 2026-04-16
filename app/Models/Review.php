@@ -9,9 +9,12 @@ class Review extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'booking_id', 'reviewable_type', 'reviewable_id', 'rating', 'comment', 'is_verified'];
+    protected $fillable = ['user_id', 'booking_id', 'reviewable_type', 'reviewable_id', 'rating', 'comment', 'is_verified', 'is_flagged'];
 
-    protected $casts = ['is_verified' => 'boolean'];
+    protected $casts = [
+        'is_verified' => 'boolean',
+        'is_flagged' => 'boolean',
+    ];
 
     public function user() { return $this->belongsTo(User::class); }
     public function booking() { return $this->belongsTo(Booking::class); }

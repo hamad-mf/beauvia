@@ -13,6 +13,7 @@ class Shop extends Model
         'user_id', 'category_id', 'name', 'slug', 'description', 'address', 'city',
         'latitude', 'longitude', 'phone', 'email', 'website', 'logo', 'cover_image',
         'opening_hours', 'rating_avg', 'rating_count', 'is_featured', 'is_active',
+        'approval_status', 'rejection_reason',
     ];
 
     protected $casts = [

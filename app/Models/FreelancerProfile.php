@@ -13,6 +13,7 @@ class FreelancerProfile extends Model
         'user_id', 'category_id', 'title', 'bio', 'specialization', 'experience_years',
         'hourly_rate', 'is_mobile', 'service_radius_km', 'cover_image',
         'rating_avg', 'rating_count', 'is_available', 'is_featured', 'is_active',
+        'approval_status', 'rejection_reason',
     ];
 
     protected $casts = [
