@@ -36,6 +36,9 @@ class FreelancerProfile extends Model
     public function scopeActive($query) { return $query->where('is_active', true); }
     public function scopeAvailable($query) { return $query->where('is_available', true); }
     public function scopeFeatured($query) { return $query->where('is_featured', true); }
+    public function scopePending($query) { return $query->where('approval_status', 'pending'); }
+    public function scopeApproved($query) { return $query->where('approval_status', 'approved'); }
+    public function scopeRejected($query) { return $query->where('approval_status', 'rejected'); }
 
     public function getCoverUrlAttribute(): string
     {

@@ -9,6 +9,16 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\Dashboard\CustomerController;
 use App\Http\Controllers\Dashboard\ShopOwnerController;
 use App\Http\Controllers\Dashboard\FreelancerDashController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Admin\AdminShopController;
+use App\Http\Controllers\Admin\AdminFreelancerController;
+use App\Http\Controllers\Admin\AdminBookingController;
+use App\Http\Controllers\Admin\AdminCategoryController;
+use App\Http\Controllers\Admin\AdminReviewController;
+use App\Http\Controllers\Admin\AdminSettingController;
+use App\Http\Controllers\Admin\AdminAnnouncementController;
+use App\Http\Controllers\Admin\AdminActivityController;
 use Illuminate\Support\Facades\Route;
 
 // --- PUBLIC ROUTES ---
@@ -70,6 +80,64 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [App\Http\Controllers\ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // --- ADMIN PANEL ---
+    Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function () {
+        // Dashboard
+        Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+        
+        // User Management
+        Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
+        Route::get('/users/{user}', [AdminUserController::class, 'show'])->name('users.show');
+        Route::patch('/users/{user}/suspend', [AdminUserController::class, 'suspend'])->name('users.suspend');
+        Route::patch('/users/{user}/reactivate', [AdminUserController::class, 'reactivate'])->name('users.reactivate');
+        Route::delete('/users/{user}', [AdminUserController::class, 'destroy'])->name('users.destroy');
+        Route::post('/users/bulk-action', [AdminUserController::class, 'bulkAction'])->name('users.bulk');
+        
+        // Shop Management
+        Route::get('/shops', [AdminShopController::class, 'index'])->name('shops.index');
+        Route::get('/shops/{shop}', [AdminShopController::class, 'show'])->name('shops.show');
+        Route::patch('/shops/{shop}/approve', [AdminShopController::class, 'approve'])->name('shops.approve');
+        Route::patch('/shops/{shop}/reject', [AdminShopController::class, 'reject'])->name('shops.reject');
+        Route::patch('/shops/{shop}/suspend', [AdminShopController::class, 'suspend'])->name('shops.suspend');
+        Route::patch('/shops/{shop}/reactivate', [AdminShopController::class, 'reactivate'])->name('shops.reactivate');
+        Route::post('/shops/bulk-action', [AdminShopController::class, 'bulkAction'])->name('shops.bulk');
+        
+        // Freelancer Management
+        Route::get('/freelancers', [AdminFreelancerController::class, 'index'])->name('freelancers.index');
+        Route::get('/freelancers/{freelancer}', [AdminFreelancerController::class, 'show'])->name('freelancers.show');
+        Route::patch('/freelancers/{freelancer}/approve', [AdminFreelancerController::class, 'approve'])->name('freelancers.approve');
+        Route::patch('/freelancers/{freelancer}/reject', [AdminFreelancerController::class, 'reject'])->name('freelancers.reject');
+        Route::patch('/freelancers/{freelancer}/suspend', [AdminFreelancerController::class, 'suspend'])->name('freelancers.suspend');
+        Route::patch('/freelancers/{freelancer}/reactivate', [AdminFreelancerController::class, 'reactivate'])->name('freelancers.reactivate');
+        Route::post('/freelancers/bulk-action', [AdminFreelancerController::class, 'bulkAction'])->name('freelancers.bulk');
+        
+        // Booking Management
+        Route::get('/bookings', [AdminBookingController::class, 'index'])->name('bookings.index');
+        Route::get('/bookings/{booking}', [AdminBookingController::class, 'show'])->name('bookings.show');
+        Route::patch('/bookings/{booking}/cancel', [AdminBookingController::class, 'cancel'])->name('bookings.cancel');
+        Route::get('/bookings/export', [AdminBookingController::class, 'export'])->name('bookings.export');
+        
+        // Category Management
+        Route::resource('categories', AdminCategoryController::class)->except(['show']);
+        Route::post('/categories/reorder', [AdminCategoryController::class, 'reorder'])->name('categories.reorder');
+        
+        // Review Management
+        Route::get('/reviews', [AdminReviewController::class, 'index'])->name('reviews.index');
+        Route::patch('/reviews/{review}/flag', [AdminReviewController::class, 'flag'])->name('reviews.flag');
+        Route::delete('/reviews/{review}', [AdminReviewController::class, 'destroy'])->name('reviews.destroy');
+        Route::post('/reviews/bulk-action', [AdminReviewController::class, 'bulkAction'])->name('reviews.bulk');
+        
+        // Settings
+        Route::get('/settings', [AdminSettingController::class, 'index'])->name('settings.index');
+        Route::patch('/settings', [AdminSettingController::class, 'update'])->name('settings.update');
+        
+        // Announcements
+        Route::resource('announcements', AdminAnnouncementController::class);
+        
+        // Activity Log
+        Route::get('/activity', [AdminActivityController::class, 'index'])->name('activity.index');
+    });
 });
 
 require __DIR__.'/auth.php';
