@@ -44,7 +44,9 @@
                                 <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                             </button>
                             <div x-show="open" @click.away="open = false" x-transition class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-2xl py-2 shadow-lg">
-                                @if(auth()->user()->isCustomer())
+                                @if(auth()->user()->isAdmin())
+                                    <a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50">Admin Dashboard</a>
+                                @elseif(auth()->user()->isCustomer())
                                     <a href="{{ route('customer.dashboard') }}" class="block px-4 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50">Dashboard</a>
                                     <a href="{{ route('customer.bookings') }}" class="block px-4 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50">My Bookings</a>
                                 @elseif(auth()->user()->isShopOwner())

@@ -81,7 +81,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [App\Http\Controllers\ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // --- ADMIN PANEL ---
+    // --- ADMIN PANEL --- 
     Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function () {
         // Dashboard
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
